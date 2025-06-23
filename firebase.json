@@ -1,0 +1,30 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "eclassify-8397f",
+          "appId": "1:61144790479:android:6939d4b9508b1d0c3eceba",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "wazifati-wrteam",
+          "appId": "1:6343732161:ios:5cc58a2dcfbbb66b2b5d40",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "eclassify-8397f",
+          "configurations": {
+            "android": "1:61144790479:android:6939d4b9508b1d0c3eceba",
+            "ios": "1:61144790479:ios:e75d14829c4536553eceba"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "61144790479",
+    "project_id": "eclassify-8397f",
+    "storage_bucket": "eclassify-8397f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61144790479:android:6939d4b9508b1d0c3eceba",
+        "android_client_info": {
+          "package_name": "com.qemma.wazifati"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61144790479-thardj2g9htfcgceh1trbuj62s97gqns.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.qemma.wazifati",
+            "certificate_hash": "9e86d3afa58b7911971f8caab72c6b5582517e4a"
+          }
+        },
+        {
+          "client_id": "61144790479-8huo5u0g6h8ma86gmag41v7p75tb1tb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD64L9Rp9Ti8qM1KLH4lXelFi1_um-GmmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61144790479-8huo5u0g6h8ma86gmag41v7p75tb1tb6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "61144790479-igr6osg4pasoabu6i4so339abatd9ba1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.qemma.wazifati"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
