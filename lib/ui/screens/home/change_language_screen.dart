@@ -65,6 +65,7 @@ class LanguagesListScreen extends StatelessWidget {
           }
           if (state is FetchLanguageFailure) {
             Widgets.hideLoder(context);
+            print(state.errorMessage);
           }
         },
         child: ListView.builder(

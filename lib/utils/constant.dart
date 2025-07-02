@@ -5,7 +5,7 @@ import 'package:wazifati/settings.dart';
 import 'package:wazifati/ui/screens/filter_screen.dart';
 import 'package:flutter/material.dart';
 
-const String svgPath = 'assets/svg/';
+const String svgPath = 'assets/icons/';
 
 class Constant {
   static const String appName = AppSettings.applicationName;

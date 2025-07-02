@@ -77,13 +77,11 @@ class _AppState extends State<App> {
           onGenerateRoute: Routes.onGenerateRouted,
           theme: appThemeData[currentTheme],
           builder: (context, child) {
-            TextDirection direction = TextDirection.ltr;
+            final direction =
+                languageState is LanguageLoader && languageState.language['rtl']
+                    ? TextDirection.rtl
+                    : TextDirection.ltr;
 
-            if (languageState is LanguageLoader) {
-              direction = languageState.language['rtl']
-                  ? TextDirection.rtl
-                  : TextDirection.ltr;
-            }
             return MediaQuery(
               data: MediaQuery.of(context).copyWith(
                 textScaler: const TextScaler.linear(1.0),
@@ -92,9 +90,7 @@ class _AppState extends State<App> {
                 textDirection: direction,
                 child: DevicePreview(
                   enabled: false,
-                  builder: (context) {
-                    return child!;
-                  },
+                  builder: (context) => child!,
                 ),
               ),
             );
@@ -104,6 +100,10 @@ class _AppState extends State<App> {
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+            Locale('ar'),
           ],
           locale: loadLocalLanguageIfFail(languageState),
         );

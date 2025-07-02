@@ -1,8 +1,7 @@
 import 'dart:convert';
-
-import 'package:wazifati/utils/hive_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:wazifati/utils/hive_utils.dart';
 
 class AppLocalization {
   final Locale locale;
@@ -12,26 +11,36 @@ class AppLocalization {
   AppLocalization(this.locale);
 
   static AppLocalization? of(BuildContext context) {
-    return Localizations.of(context, AppLocalization);
+    return Localizations.of<AppLocalization>(context, AppLocalization);
   }
 
-  Future loadJson() async {
-    String jsonStringValues =
-        await rootBundle.loadString('assets/languages/template.json');
+  Future<void> loadJson() async {
+    String jsonStringValues;
+
+    try {
+      jsonStringValues = await rootBundle
+          .loadString('assets/languages/${locale.languageCode}.json');
+    } catch (e) {
+      jsonStringValues =
+          await rootBundle.loadString('assets/languages/en.json');
+    }
+
     Map<String, dynamic> mappedJson = {};
 
-    if (HiveUtils.getLanguage() == null ||
-        HiveUtils.getLanguage()['data'] == null) {
+    final localHiveLanguage = HiveUtils.getLanguage();
+    if (localHiveLanguage == null || localHiveLanguage['data'] == null) {
       mappedJson = json.decode(jsonStringValues);
     } else {
-      mappedJson = Map<String, dynamic>.from(HiveUtils.getLanguage()['data']);
+      mappedJson = Map<String, dynamic>.from(localHiveLanguage['data']);
     }
+
     _localizedValues =
         mappedJson.map((key, value) => MapEntry(key, value.toString()));
   }
 
   String? getTranslatedValues(String? key) {
-    return _localizedValues[key!];
+    if (key == null) return null;
+    return _localizedValues[key];
   }
 
   static const LocalizationsDelegate<AppLocalization> delegate =
@@ -43,7 +52,7 @@ class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
 
   @override
   bool isSupported(Locale locale) {
-    return true;
+    return ['en', 'ar'].contains(locale.languageCode);
   }
 
   @override
@@ -54,7 +63,6 @@ class _AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {
   }
 
   @override
-  bool shouldReload(LocalizationsDelegate<AppLocalization> old) {
-    return true;
-  }
+  bool shouldReload(covariant LocalizationsDelegate<AppLocalization> old) =>
+      false;
 }

@@ -5,8 +5,8 @@ class SubscriptionPackageModel {
   double? price;
   double? finalPrice;
   double? discount;
-  String? duration;
-  String? limit;
+  String? duration; // keep as string due to 'unlimited'
+  String? limit;    // same here
   String? type;
   String? icon;
   String? description;
@@ -16,53 +16,51 @@ class SubscriptionPackageModel {
   bool? isActive;
   List<UserPurchasedPackages>? userPurchasedPackages;
 
-  SubscriptionPackageModel(
-      {this.id,
-      this.iosProductId,
-      this.name,
-      this.price,
-      this.finalPrice,
-      this.discount,
-      this.duration,
-      this.limit,
-      this.type,
-      this.icon,
-      this.description,
-      this.status,
-      this.createdAt,
-      this.updatedAt,
-      this.isActive,
-      this.userPurchasedPackages});
+  SubscriptionPackageModel({
+    this.id,
+    this.iosProductId,
+    this.name,
+    this.price,
+    this.finalPrice,
+    this.discount,
+    this.duration,
+    this.limit,
+    this.type,
+    this.icon,
+    this.description,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.isActive,
+    this.userPurchasedPackages,
+  });
 
   SubscriptionPackageModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    id = _parseToInt(json['id']);
     iosProductId = json['ios_product_id'];
     name = json['name'];
-    price = json['price'] != null ? json['price'].toDouble() : null;
-    discount = json['discount_in_percentage'] != null
-        ? json['discount_in_percentage'].toDouble()
-        : null;
-    finalPrice =
-        json['final_price'] != null ? json['final_price'].toDouble() : null;
+    price = _parseToDouble(json['price']);
+    discount = _parseToDouble(json['discount_in_percentage']);
+    finalPrice = _parseToDouble(json['final_price']);
     duration = json['duration'];
     limit = json['item_limit'];
     type = json['type'];
     icon = json['icon'];
     description = json['description'];
-    status = json['status'];
+    status = _parseToInt(json['status']);
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    isActive = json['is_active'];
+    isActive = json['is_active'] == true;
+
     if (json['user_purchased_packages'] != null) {
-      userPurchasedPackages = <UserPurchasedPackages>[];
-      json['user_purchased_packages'].forEach((v) {
-        userPurchasedPackages!.add(UserPurchasedPackages.fromJson(v));
-      });
+      userPurchasedPackages = (json['user_purchased_packages'] as List)
+          .map((v) => UserPurchasedPackages.fromJson(v))
+          .toList();
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['ios_product_id'] = iosProductId;
     data['name'] = name;
@@ -87,7 +85,22 @@ class SubscriptionPackageModel {
 
   @override
   String toString() {
-    return 'SubscriptionPackageModel(id: $id, name: $name, duration: $duration, price: $price,final_price: $finalPrice,discount_in_percentage:$discount, status: $status, item_limit: $limit, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, icon: $icon,description: $description,is_active: $isActive)';
+    return 'SubscriptionPackageModel(id: $id, name: $name, duration: $duration, price: $price, final_price: $finalPrice, discount: $discount, status: $status, item_limit: $limit, type: $type, createdAt: $createdAt, updatedAt: $updatedAt, icon: $icon, description: $description, is_active: $isActive)';
+  }
+
+  static double? _parseToDouble(dynamic value) {
+    if (value == null) return null;
+    if (value is double) return value;
+    if (value is int) return value.toDouble();
+    if (value is String) return double.tryParse(value);
+    return null;
+  }
+
+  static int? _parseToInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 }
 
@@ -104,46 +117,54 @@ class UserPurchasedPackages {
   String? remainingDays;
   String? remainingItemLimit;
 
-  UserPurchasedPackages(
-      {this.id,
-      this.userId,
-      this.packageId,
-      this.startDate,
-      this.endDate,
-      this.totalLimit,
-      this.usedLimit,
-      this.createdAt,
-      this.updatedAt,
-      this.remainingDays,
-      this.remainingItemLimit});
+  UserPurchasedPackages({
+    this.id,
+    this.userId,
+    this.packageId,
+    this.startDate,
+    this.endDate,
+    this.totalLimit,
+    this.usedLimit,
+    this.createdAt,
+    this.updatedAt,
+    this.remainingDays,
+    this.remainingItemLimit,
+  });
 
   UserPurchasedPackages.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    userId = json['user_id'];
-    packageId = json['package_id'];
+    id = _parseToInt(json['id']);
+    userId = _parseToInt(json['user_id']);
+    packageId = _parseToInt(json['package_id']);
     startDate = json['start_date'];
     endDate = json['end_date'];
-    totalLimit = json['total_limit'];
-    usedLimit = json['used_limit'];
+    totalLimit = _parseToInt(json['total_limit']);
+    usedLimit = _parseToInt(json['used_limit']);
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    remainingDays = json['remaining_days'].toString();
-    remainingItemLimit = json['remaining_item_limit'].toString();
+    remainingDays = json['remaining_days']?.toString();
+    remainingItemLimit = json['remaining_item_limit']?.toString();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['user_id'] = this.userId;
-    data['package_id'] = this.packageId;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
-    data['total_limit'] = this.totalLimit;
-    data['used_limit'] = this.usedLimit;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
-    data['remaining_days'] = this.remainingDays;
-    data['remaining_item_limit'] = this.remainingItemLimit;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['user_id'] = userId;
+    data['package_id'] = packageId;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
+    data['total_limit'] = totalLimit;
+    data['used_limit'] = usedLimit;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
+    data['remaining_days'] = remainingDays;
+    data['remaining_item_limit'] = remainingItemLimit;
     return data;
+  }
+
+  static int? _parseToInt(dynamic value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is String) return int.tryParse(value);
+    return null;
   }
 }

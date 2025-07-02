@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wazifati/data/cubits/slider_cubit.dart';
-import 'package:wazifati/data/model/home_slider.dart';
 import 'package:wazifati/utils/ui_utils.dart';
 
 class SliderWidget extends StatefulWidget {

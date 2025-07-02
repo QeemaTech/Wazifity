@@ -1,10 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 import 'dart:developer';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wazifati/utils/api.dart';
 import 'package:wazifati/utils/constant.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class FetchLanguageState {}
 
@@ -68,25 +66,35 @@ class FetchLanguageCubit extends Cubit<FetchLanguageState> {
   Future<void> getLanguage(String languageCode) async {
     try {
       emit(FetchLanguageInProgress());
+      log('Fetching language: $languageCode', name: 'FetchLanguageCubit');
 
-      Map<String, dynamic> response = await Api.get(
+      final response = await Api.get(
         url: Api.getLanguageApi,
         queryParameters: {Api.languageCode: languageCode},
       );
 
+      log('Language API response: $response', name: 'FetchLanguageCubit');
+
+      final data = response['data'];
+
+      if (data == null || data['file_name'] == null || data['file_name'] is! Map) {
+        throw Exception('Invalid language data structure or missing file_name');
+      }
+
       Constant.currentLocale =
-          Constant.countryLocaleMap[response['data']['country_code']] ??
-              'en_US';
+          Constant.countryLocaleMap[data['country_code']] ?? 'en_US';
+
       emit(FetchLanguageSuccess(
-          code: response['data']['code'],
-          countryCode: response['data']['country_code'],
-          rtl: response['data']['rtl'],
-          image: response['data']['image'],
-          engName: response['data']['name_in_english'],
-          data: response['data']['file_name'],
-          name: response['data']['name']));
-    } catch (e) {
-      log(e.toString(), name: 'ERROR');
+        code: data['code'],
+        countryCode: data['country_code'],
+        rtl: data['rtl'],
+        image: data['image'],
+        engName: data['name_in_english'],
+        data: data['file_name'],
+        name: data['name'],
+      ));
+    } catch (e, stack) {
+      log('Language Fetch Error: $e', name: 'FetchLanguageCubit', stackTrace: stack);
       emit(FetchLanguageFailure(e.toString()));
     }
   }

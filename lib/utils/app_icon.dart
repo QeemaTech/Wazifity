@@ -3,14 +3,13 @@ class AppIcons {
   AppIcons._();
 
   //
-  static const String _basePath = "assets/svg/";
+  static const String _basePath = "assets/icons/";
 
   static final MainIcons main = MainIcons();
 
-  static String splashLogo = _svgPath("Logo/splashlogo");
+  static String splashLogo = _svgPath("logo/splashlogo");
 
   static String update = _svgPath("update");
-  static String companyLogo = _svgPath("Logo/company_logo");
   static String home = _svgPath("home");
   static String profile = _svgPath("profile");
   static String search = _svgPath("search");
@@ -45,8 +44,8 @@ class AppIcons {
   static String warning = _svgPath("warning");
 
   static String promoted = _svgPath("promoted");
-  static String homeLogo = _svgPath("Logo/homelogo");
-  static String placeHolder = _svgPath("Logo/placeholder");
+  static String homeLogo = _svgPath("logo/homelogo");
+  static String placeHolder = _svgPath("logo/placeholder");
   static String noInternet = _svgPath("no_internet_illustrator");
   static String somethingWentWrong =
       _svgPath("Illustrators/something_went_wrong");

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 extension TranslateString on String {
   String translate(BuildContext context) {
-    return (AppLocalization.of(context)!.getTranslatedValues(this) ?? this)
-        .trim();
+    final translation = AppLocalization.of(context)?.getTranslatedValues(this);
+    return (translation ?? this).trim();
   }
 }

@@ -94,8 +94,8 @@ class _JobApplicationFormState extends State<JobApplicationForm> {
                     resume: data['resume'],
                     createdAt: data['created_at'],
                     id: data['id']));
+            // Navigator.of(context).pop();
             HelperUtils.showSnackBarMessage(context, state.successMessage);
-            Navigator.of(context).pop();
           }
           if (state is ApplyJobApplicationFail) {
             HelperUtils.showSnackBarMessage(context, state.error);
@@ -151,6 +151,12 @@ class _JobApplicationFormState extends State<JobApplicationForm> {
                               if (state is ApplyJobApplicationInProgress)
                                 return;
                               if (_formKey.currentState!.validate()) {
+                                if (pickedFile == null) {
+                                  HelperUtils.showSnackBarMessage(context,
+                                      "pleaseUploadResume".translate(context));
+                                  return;
+                                }
+
                                 Map<String, dynamic> data = {};
                                 data['item_id'] = widget.item.id;
                                 data['full_name'] = nameController.text;
@@ -160,7 +166,33 @@ class _JobApplicationFormState extends State<JobApplicationForm> {
                                 context
                                     .read<ApplyJobApplicationCubit>()
                                     .applyJobApplication(data, pickedFile);
+
+                                setState(() {
+                                  isBack = true;
+                                });
+                                Future.delayed(const Duration(seconds: 2), () {
+                                  if (mounted) Navigator.of(context).pop();
+                                });
                               }
+
+                              // if (_formKey.currentState!.validate()) {
+                              //   Map<String, dynamic> data = {};
+                              //   data['item_id'] = widget.item.id;
+                              //   data['full_name'] = nameController.text;
+                              //   data['email'] = emailController.text;
+                              //   data['mobile'] = phoneController.text;
+
+                              //   context
+                              //       .read<ApplyJobApplicationCubit>()
+                              //       .applyJobApplication(data, pickedFile);
+
+                              //   setState(() {
+                              //     isBack = true;
+                              //   });
+                              //   Future.delayed(const Duration(seconds: 2), () {
+                              //     if (mounted) Navigator.of(context).pop();
+                              //   });
+                              // }
                             },
                               buttonTitle: "enquireNow".translate(context),
                               radius: 8,
