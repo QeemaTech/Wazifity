@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>446970395101-ocd0b3u6i39jq84gi9e2tufrj7e7076i.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.446970395101-ocd0b3u6i39jq84gi9e2tufrj7e7076i</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>446970395101-gd8s28jmr1ngm1nka0k6k2ksfneh78vu.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAu7mvGam7cQgfCtaVNpaYknKrlKNwx5Lo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>446970395101</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.qemma.wazifatiapp</string>
+	<key>PROJECT_ID</key>
+	<string>waziafati-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>waziafati-app.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:446970395101:ios:13905ab6cd2b0ae15ede34</string>
+</dict>
+</plist>

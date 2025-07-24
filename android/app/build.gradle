@@ -59,7 +59,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.qemma.wazifati"
+        applicationId "com.qemma.wazifatiapp"
         minSdkVersion 24
         targetSdkVersion 35
         multiDexEnabled true

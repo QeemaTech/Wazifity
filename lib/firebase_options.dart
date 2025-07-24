@@ -50,23 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD64L9Rp9Ti8qM1KLH4lXelFi1_um-GmmA',
-    appId: '1:61144790479:android:6939d4b9508b1d0c3eceba',
-    messagingSenderId: '61144790479',
-    projectId: 'eclassify-8397f',
-    storageBucket: 'eclassify-8397f.firebasestorage.app',
+    apiKey: 'AIzaSyA3meErNBMNnaWNgpiwZ4HWTyOFBk1k7Lk',
+    appId: '1:446970395101:android:244966854c09cf1e5ede34',
+    messagingSenderId: '446970395101',
+    projectId: 'waziafati-app',
+    storageBucket: 'waziafati-app.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCDnHXfZLpcm8KerimibUeM7h-IO7Ht6TQ',
-    appId: '1:61144790479:ios:e75d14829c4536553eceba',
-    messagingSenderId: '61144790479',
-    projectId: 'eclassify-8397f',
-    storageBucket: 'eclassify-8397f.firebasestorage.app',
-    androidClientId:
-        '61144790479-nq0melc0slo4o6j6avpbb957ngllfucq.apps.googleusercontent.com',
-    iosClientId:
-        '61144790479-igr6osg4pasoabu6i4so339abatd9ba1.apps.googleusercontent.com',
-    iosBundleId: 'com.qemma.wazifati',
+    apiKey: 'AIzaSyAu7mvGam7cQgfCtaVNpaYknKrlKNwx5Lo',
+    appId: '1:446970395101:ios:13905ab6cd2b0ae15ede34',
+    messagingSenderId: '446970395101',
+    projectId: 'waziafati-app',
+    storageBucket: 'waziafati-app.firebasestorage.app',
+    iosBundleId: 'com.qemma.wazifatiapp',
   );
+
 }
